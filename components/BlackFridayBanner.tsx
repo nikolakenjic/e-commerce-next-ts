@@ -25,7 +25,8 @@ const BlackFridayBanner = async () => {
                 <span className="text-red-600">{sale.couponCode}</span>
               </span>
               <span className="mt-2 font-bold text-base sm:text-xl">
-                for {sale.discountAmount}
+                {' '}
+                for {sale.discountAmount} % off
               </span>
             </div>
           </div>
