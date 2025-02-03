@@ -1,5 +1,6 @@
 import { imageUrl } from '@/lib/imageUrl';
 import { getProductsBySlug } from '@/sanity/lib/products/getProductsBySlug';
+import { PortableText } from 'next-sanity';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import React from 'react';
@@ -20,7 +21,7 @@ const ProductPage = async ({
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col lg:flex-row gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div
           className={`relative aspect-square overflow-hidden rounded-lg shadow-lg ${isOutOfStock ? 'opacity-50' : ''}`}
         >
@@ -37,6 +38,20 @@ const ProductPage = async ({
               <span className="text-white font-bold text-lg">Out of stock</span>
             </div>
           )}
+        </div>
+
+        <div className="flex flex-col justify-between">
+          <div>
+            <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+            <div className="text-xl font-semibold mb-4">
+              ${product.price?.toFixed()}
+            </div>
+            <div className="prose max-w-none mb-6">
+              {Array.isArray(product.description) && (
+                <PortableText value={product.description} />
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
